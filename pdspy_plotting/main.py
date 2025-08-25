@@ -31,7 +31,7 @@ def main():
     args = parser.parse_args()
     # if a config file is provided, use those plot parameters
     if args.config:
-        import .plot_params
+        import plot_params
     # otherwise, use the provided plot parameters
     else:
         plot_params = args
