@@ -13,7 +13,7 @@ import sys
 import os
 from mpi4py import MPI
 import argparse
-from residuals import create_residual_image
+from .residuals import create_residual_image
 
 def main():
 
@@ -265,6 +265,7 @@ def main():
 
             plt.savefig(source_path + "plots/{0}_{1}.png".format(model, color))
         
-
+def main():
+    print("testing 123")
 if __name__ == '__main__':
-    main():
+    main()
