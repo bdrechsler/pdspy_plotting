@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pdspy-plotting"
+name = "pdspy_plotting"
 version = "0.1.0"
 description = "Program to help plotting pdspy-results"
 readme = "README.md"
@@ -38,12 +38,12 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/bdrechsler/pdspy-plotting"
-Repository = "https://github.com/bdrechsler/pdspy-plotting.git"
-Issues = "https://github.com/bdrechsler/pdspy-plotting/issues"
+Homepage = "https://github.com/bdrechsler/pdspy_plotting"
+Repository = "https://github.com/bdrechsler/pdspy_plotting.git"
+Issues = "https://github.com/bdrechsler/pdspy_plotting/issues"
 
 [project.scripts]
-pdspy-plot = "pdspy-plotting.main:main"
+pdspy-plot = "pdspy_plotting.main:main"
 
 [tool.setuptools.packages.find]
 # This tells setuptools to automatically find packages
