@@ -147,16 +147,16 @@ def main():
 
 
         # create the plot
-        if params.plot_type == 'seperate':
+        if plot_params.plot_type == 'seperate':
             nplots = 1
-        elif params.plot_type == 'full':
+        elif plot_params.plot_type == 'full':
             nplots=2
-        elif param.plot_type == 'both':
+        elif plot_params.plot_type == 'both':
             nplots=3
 
         for i in range(nplots):
             plt.close()
-            if params.plot_type == 'seperate' or params.plot_type == 'both':
+            if plot_params.plot_type == 'seperate' or plot_params.plot_type == 'both':
                 fig, ax = plt.subplots(nrows=3, ncols=7, sharex=True, sharey=True, dpi=300)
                 if i == 0:
                     print('making blue figure')
@@ -170,7 +170,7 @@ def main():
                     v_end = v_end_r
                     color = 'red'
                     print(v_start, v_end)
-            elif params.plot_type == 'full' or (params.plot_type == 'both' and i == 2):
+            elif plot_params.plot_type == 'full' or (plot_params.plot_type == 'both' and i == 2):
                 fig, ax = plt.subplots(nrows=3, ncols=11, sharex=True, sharey=True, dpi=300)
                 v_start = v_start_b
                 v_end = v_end_r
