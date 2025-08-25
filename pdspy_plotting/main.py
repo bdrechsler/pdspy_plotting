@@ -265,7 +265,5 @@ def main():
 
             plt.savefig(source_path + "plots/{0}_{1}.png".format(model, color))
         
-def main():
-    print("testing 123")
 if __name__ == '__main__':
     main()
