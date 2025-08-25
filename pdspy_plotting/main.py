@@ -269,7 +269,7 @@ def main():
                                 wspace=0., hspace=0.0)
             fig.tight_layout()
 
-            plt.savefig(source_path + "plots/{0}_{1}.png".format(model, color))
+            plt.savefig("plots/{0}_{1}.png".format(model, color))
         
 if __name__ == '__main__':
     main()
