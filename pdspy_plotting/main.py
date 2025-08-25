@@ -8,12 +8,12 @@ import pdspy.imaging as imaging
 import matplotlib.pyplot as plt
 import scipy.stats
 import numpy as np
-from plot_channel_maps import *
 import sys
 import os
 from mpi4py import MPI
 import argparse
 from .residuals import create_residual_image
+from .plot_channel_maps import plot_channel_maps_bd
 
 def main():
 
