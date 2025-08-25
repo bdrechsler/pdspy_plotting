@@ -19,7 +19,7 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-c', '--config', default=None, help='path to plot_params.py')
+    parser.add_argument('-c', '--config', action='store_true',  help='determine if plot_params.py should be used')
     parser.add_argument('-s', '--source', default=None, help='source name')
     parser.add_argument('-w', '--width', default=6, help='width of velocity range to plot')
     parser.add_argument('-p', '--path', default="../", help='root directory of models')
@@ -30,9 +30,8 @@ def main():
 
     args = parser.parse_args()
     # if a config file is provided, use those plot parameters
-    if args.config != None:
-        sys.path.append(args.config)
-        import plot_params
+    if args.config:
+        import .plot_params
     # otherwise, use the provided plot parameters
     else:
         plot_params = args
