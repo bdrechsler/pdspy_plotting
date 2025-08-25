@@ -153,28 +153,22 @@ def main():
             nplots=2
         elif plot_params.plot_type == 'both':
             nplots=3
-
-        for i in range(nplots):
+        
+        for i in range(2):
             plt.close()
-            if plot_params.plot_type == 'seperate' or plot_params.plot_type == 'both':
-                fig, ax = plt.subplots(nrows=3, ncols=7, sharex=True, sharey=True, dpi=300)
-                if i == 0:
-                    print('making blue figure')
-                    v_start = v_start_b
-                    v_end = v_end_b
-                    color = 'blue'
-                    print(v_start, v_end)
-                elif i == 1:
-                    print('making red figure')
-                    v_start = v_start_r
-                    v_end = v_end_r
-                    color = 'red'
-                    print(v_start, v_end)
-            elif plot_params.plot_type == 'full' or (plot_params.plot_type == 'both' and i == 2):
-                fig, ax = plt.subplots(nrows=3, ncols=11, sharex=True, sharey=True, dpi=300)
+            fig, ax = plt.subplots(nrows=3, ncols=7, sharex=True, sharey=True, dpi=300)
+            if i == 0:
+                print('making blue figure')
                 v_start = v_start_b
+                v_end = v_end_b
+                color = 'blue'
+                print(v_start, v_end)
+            elif i == 1:
+                print('making red figure')
+                v_start = v_start_r
                 v_end = v_end_r
-                color= 'full'
+                color = 'red'
+                print(v_start, v_end)
 
             for n in range(3):
                 # first, plot the data
