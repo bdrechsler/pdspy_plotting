@@ -115,29 +115,35 @@ def main():
 
         # load in models and residuals if they exists
         # if not, generate them
-        if os.path.exists(model_path + 'm.hdf5'):
+        if os.path.exists('models/{}_m.hdf5'.format(model)):
+            print("reading model")
             m = modeling.YSOModel()
-            m.read(model_path + 'm.hdf5')
+            m.read('models/{}_m.hdf5'.format(model))
         else:
+            print("generating model")
             m = modeling.run_flared_model(visibilities=config.visibilities, params=params, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False, 
                                         ftcode='galario-unstructured')
-            m.write(model_path + 'm.hdf5')
+            m.write('models/{}_m.hdf5'.format(model))
 
-        if os.path.exists(model_path + 'm_adj.hdf5'):
+        if os.path.exists('models/{}_m_adj.hdf5'.format(model)):
+            print("reading adjusted model")
             m_adj = modeling.YSOModel()
-            m_adj.read("../{}/m_adj.hdf5".format(model))
+            m_adj.read('models/{}_m_adj.hdf5'.format(model))
         else:
+            print("generating adjusted model")
             m_adj = modeling.run_flared_model(visibilities=config.visibilities, params=params_adj, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False)
-            m_adj.write(model_path + 'm_adj.hdf5')
+            m_adj.write('models/{}_m_adj.hdf5'.format(model))
 
-        if os.path.exists(model_path + "residual_image.hdf5"):
+        if os.path.exists("res_imgs/{}_res_img.hdf5".format(model)):
+            print("reading residual image")
             residual = imaging.Image()
-            residual.read("../{}/residual_image.hdf5".format(model))
+            residual.read("res_imgs/{}_res_img.hdf5".format(model))
         else:
+            print("generating residual image")
             residual = create_residual_image(visibilities, m)
-            residual.write(model_path + "residual_image.hdf5")
+            residual.write("res_imgs/{}_res_img.hdf5".format(model))
 
 
         # create the plot
