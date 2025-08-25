@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdspy-plotting"
+version = "0.1.0"
+description = "Program to help plotting pdspy-results"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Blake Drechsler", email = "wbd814@gmail.com"}
+]
+keywords = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    # List any dependencies here, e.g.:
+    # "requests>=2.25.0",
+    # "click>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.0",
+    "black",
+    "flake8",
+]
+
+[project.urls]
+Homepage = "https://github.com/bdrechsler/pdspy-plotting"
+Repository = "https://github.com/bdrechsler/pdspy-plotting.git"
+Issues = "https://github.com/bdrechsler/pdspy-plotting/issues"
+
+[project.scripts]
+pdspy-plot = "pdspy-plotting.main:main"
+
+[tool.setuptools.packages.find]
+# This tells setuptools to automatically find packages
+# You can also be more explicit if needed
+
+[tool.setuptools.package-data]
+# Include additional files if needed
+# your_package = ["*.txt", "*.json"]
