@@ -162,13 +162,11 @@ def main():
                 v_start = v_start_b
                 v_end = v_end_b
                 color = 'blue'
-                print(v_start, v_end)
             elif i == 1:
                 print('making red figure')
                 v_start = v_start_r
                 v_end = v_end_r
                 color = 'red'
-                print(v_start, v_end)
 
             for n in range(3):
                 # first, plot the data
@@ -249,7 +247,6 @@ def main():
                     show_xlabel = True
 
                 # create the plot
-                print('plotting row')
                 plot_channel_maps_bd(visibilities, m_adj, params, params_adj, residual, v_start, v_end,
                                     index=0, fig=(fig, ax[n:n+1, :]), image=plot_type, contours=plot_type,
                                     vmin=vmin, vmax=vmax, levels=levels, negative_levels=negative_levels,
