@@ -5,7 +5,7 @@ from .plot_channel_maps import plot_channel_maps_bd
 
 def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start, v_end,
               index, image_cmap, contours_colors, fontsize,
-              skip, v_width, plot_type, nrows, ncols):
+              skip, v_width, plot_name, nrows, ncols):
     plt.close()
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, sharey=True, dpi=300)
     for n in range(3):
@@ -99,4 +99,4 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
                         wspace=0., hspace=0.0)
     fig.tight_layout()
 
-    plt.savefig("plots/{0}_{1}.png".format(model, plot_type))
+    plt.savefig("plots/{0}_{1}.png".format(model, plot_name))
