@@ -162,7 +162,7 @@ def main():
                 v_start = v_start_b
                 v_end = v_end_b
                 color = 'blue'
-            elif i == 1:
+            else:
                 print('making red figure')
                 v_start = v_start_r
                 v_end = v_end_r
@@ -195,7 +195,6 @@ def main():
 
                     # get name of molecule
                     molecule = str(visibilities['lam'][0])
-                    print(molecule + " " + str(visibilities['freq'][0]) + ' GHz') # print molecule and frequency
                     
                     # title the plot with the name of the molecule
                     ax[n, 0].set_title(molecule)
@@ -262,5 +261,6 @@ def main():
 
             plt.savefig("plots/{0}_{1}.png".format(model, color))
         
+
 if __name__ == '__main__':
     main()
