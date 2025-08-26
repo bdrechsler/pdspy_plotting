@@ -145,7 +145,7 @@ def main():
             residual = create_residual_image(visibilities, m)
             residual.write("res_imgs/{}_res_img.hdf5".format(model))
         
-        if plot_params.plot_type == 'seperate' or plot_params.plot_type == 'both':
+        if plot_params.plot_type == 'seperate':
             print('making blue plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_b, 0, 'BlueToRed', 'k', 7, 1,
@@ -154,14 +154,11 @@ def main():
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'red', 3, 7)
-        if plot_params.plot_type == 'full' or plot_params.plot_type == 'both':
+        if plot_params.plot_type == 'full':
             print('making full plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'full', 3, 11)
-
-
-        
 
 if __name__ == '__main__':
     main()
