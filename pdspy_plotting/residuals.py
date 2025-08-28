@@ -14,7 +14,7 @@ def create_residual_image(visibilities, m):
     residuals.imag -= m.visibilities['C18O'].imag
 
     # clean to create an image to plot
-    print('cleaning ', model)
+    print('cleaning')
     res_img = clean(residuals,
                     imsize=visibilities['image_npix'][0],
                     pixel_size=visibilities['image_pixelsize'][0],
