@@ -150,7 +150,7 @@ def main():
             print('making red plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'red', 3, plot_params.ncols, plot_params.levels plot_params.negative_levels)
+                      v_width, 'red', 3, plot_params.ncols, plot_params.levels, plot_params.negative_levels)
         if plot_params.plot_type == 'full':
             print('making full plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
