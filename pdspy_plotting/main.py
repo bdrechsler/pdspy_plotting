@@ -8,6 +8,7 @@ import pdspy.imaging as imaging
 import matplotlib.pyplot as plt
 import scipy.stats
 import numpy as np
+import importlib.util
 import sys
 import os
 from mpi4py import MPI
@@ -20,22 +21,19 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-c', '--config', default=None, help='path to plot_params.py')
-    parser.add_argument('-s', '--source', default=None, help='source name')
-    parser.add_argument('-w', '--width', default=6, help='width of velocity range to plot')
-    parser.add_argument('-p', '--path', default="../", help='root directory of models')
-    parser.add_argument('-m', '--models', nargs='+', default=['exptaper'], help='models to plot')
-    parser.add_argument('-t', '--type', choices=['full', 'serperate', 'both'], default='both',
-                        help='determine if one plot is made or separeate blue/red-shifted plots, or both')
-    parser.add_argument('-n', '--ncpu', default=40, help='number of cpus to use')
+
 
     args = parser.parse_args()
-    # if a config file is provided, use those plot parameters
-    if args.config != None:
-        sys.path.append(args.config)
-        import plot_params
-    # otherwise, use the provided plot parameters
+    # add param file to path so it can be imported
+    # sys.path.append(args.config)
+    # import plot_params
+    if os.path.exists(args.config):
+        spec = importlib.util.spec_from_file_location("parameters", args.config)
+        plot_params = importlib.util.module_from_spec(spec)
+        sys.modules["parameters"] = plot_params
+        spec.loader.exec_module(plot_params)
     else:
-        plot_params = args
+        print("Parameter file not found")
 
     comm = MPI.COMM_WORLD
 
@@ -83,10 +81,7 @@ def main():
 
         # update nrows and ncols
         config.visibilities['nrows'] = [1,1,1]
-        if plot_params.plot_type == 'seperate':
-            config.visibilities['ncols'] = [7, 7, 7]
-        elif plot_params.plot_type == 'full':
-            config.visibilities['ncols'] = [11, 11, 11]
+        config.visibilities['ncols'] = [plot_params.ncol, plot_params.ncol, plot_params.ncol]
 
         # not sure what ind0 is 
         config.visibilities['ind0'] = [2,2,2]
