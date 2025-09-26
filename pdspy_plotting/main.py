@@ -116,6 +116,7 @@ def main():
             m.read('models/{}_m.hdf5'.format(model))
         else:
             print("generating model")
+            os.makedirs('models/', exist_ok=True)
             m = modeling.run_flared_model(visibilities=config.visibilities, params=params, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False, 
                                         ftcode='galario-unstructured')
@@ -137,6 +138,7 @@ def main():
             residual.read("res_imgs/{}_res_img.hdf5".format(model))
         else:
             print("generating residual image")
+            os.makedirs('res_imgs/', exist_ok=True)
             residual = create_residual_image(visibilities, m)
             residual.write("res_imgs/{}_res_img.hdf5".format(model))
         
