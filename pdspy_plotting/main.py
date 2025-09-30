@@ -90,7 +90,7 @@ def main():
         config.visibilities['fmt'] = ['5.1f', '5.1f', '5.1f']
 
         ## read in mm visibilites
-        visibilities, images, spectra = utils.load_data(config, model="flared")
+        # visibilities, images, spectra = utils.load_data(config, model="flared")
 
         # load in dynesty resulsts
         keys, params, sigma, samples = utils.load_results(config, model_path=model_path, code='dynesty',
@@ -140,24 +140,25 @@ def main():
             residual.read(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
         else:
             print("generating residual image")
+            visibilities, images, spectra = utils.load_data(config, model="flared")
             os.makedirs(param_path + '/res_imgs/', exist_ok=True)
             residual = create_residual_image(visibilities, m)
             residual.write(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
         
         if plot_params.plot_type == 'seperate':
             print('making blue plot')
-            plot_grid(model, visibilities, m_adj, params, params_adj, residual,
+            plot_grid(model, config.visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_b, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'blue', 3, plot_params.ncol, plot_params.contour_levels,
                       plot_size=plot_params.plot_size, outdir=param_path + "/plots/")
             print('making red plot')
-            plot_grid(model, visibilities, m_adj, params, params_adj, residual,
+            plot_grid(model, config.visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'red', 3, plot_params.ncol, plot_params.contour_levels,
                       plot_size=plot_params.plot_size, outdir=param_path + "/plots/")
         if plot_params.plot_type == 'full':
             print('making full plot')
-            plot_grid(model, visibilities, m_adj, params, params_adj, residual,
+            plot_grid(model, config.visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'full', 3, plot_params.ncol, plot_params.contour_levels,
                       plot_size=plot_params.plot_size, outdir=param_path + "/plots/")
