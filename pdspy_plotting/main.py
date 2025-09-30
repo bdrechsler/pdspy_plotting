@@ -154,7 +154,7 @@ def main():
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
                       v_width, 'red', 3, plot_params.ncol, plot_params.contour_levels,
-                      plot_size=plot_params.plot_size, outdir=param_path = "/plots/")
+                      plot_size=plot_params.plot_size, outdir=param_path + "/plots/")
         if plot_params.plot_type == 'full':
             print('making full plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
