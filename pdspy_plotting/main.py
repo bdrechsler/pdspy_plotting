@@ -77,7 +77,7 @@ def main():
         config.visibilities['image_file'] = [abs_path]
 
         # change the image ticks
-        config.visibilities['image_ticks'] = [np.array([-1.5, 0, 1.5])]
+        config.visibilities['image_ticks'] = [np.array(plot_params.ticks)]
 
         # update nrows and ncols
         config.visibilities['nrows'] = [1,1,1]

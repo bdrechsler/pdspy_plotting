@@ -13,4 +13,5 @@ contour_levels = {"data": (6.0, 31.0),
                   "residuals": (7.0, 31.0),
                   "nlevels": 10}
 plot_size = (12, 3)
+ticks = [-1.5, 0, 1.5]
 ncpu=8 # number of cpus
