@@ -8,7 +8,6 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
               skip, v_width, plot_name, nrows, ncols, contour_levels, plot_size, outdir):
     plt.close()
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, sharey=True, dpi=300)
-    fig.set_size_inches(plot_size[0], plot_size[1])
     for n in range(3):
         # first, plot the data
         if n == 0:
@@ -105,7 +104,7 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
                             skip=1, v_width=v_width)
         
     # set figure size
-    fig.set_size_inches((10.5, 4.0))
+    fig.set_size_inches(plot_size)
     fig.subplots_adjust(left=0.07, right=0.98, top=0.98, bottom=0.08,
                         wspace=0., hspace=0.0)
     fig.tight_layout()
