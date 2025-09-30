@@ -24,9 +24,9 @@ def main():
 
 
     args = parser.parse_args()
-    # add param file to path so it can be imported
-    # sys.path.append(args.config)
-    # import plot_params
+
+    param_path = os.path.dirname(args.config)
+    # import plot parameters
     if os.path.exists(args.config):
         spec = importlib.util.spec_from_file_location("parameters", args.config)
         plot_params = importlib.util.module_from_spec(spec)
@@ -110,52 +110,55 @@ def main():
 
         # load in models and residuals if they exists
         # if not, generate them
-        if os.path.exists('models/{}_m.hdf5'.format(model)):
+        if os.path.exists(param_path + '/models/{}_m.hdf5'.format(model)):
             print("reading model")
             m = modeling.YSOModel()
-            m.read('models/{}_m.hdf5'.format(model))
+            m.read(param_path + '/models/{}_m.hdf5'.format(model))
         else:
             print("generating model")
-            os.makedirs('models/', exist_ok=True)
+            os.makedirs(param_path + '/models/', exist_ok=True)
             m = modeling.run_flared_model(visibilities=config.visibilities, params=params, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False, 
                                         ftcode='galario-unstructured')
-            m.write('models/{}_m.hdf5'.format(model))
+            m.write(param_path + '/models/{}_m.hdf5'.format(model))
 
-        if os.path.exists('models/{}_m_adj.hdf5'.format(model)):
+        if os.path.exists(param_path + '/models/{}_m_adj.hdf5'.format(model)):
             print("reading adjusted model")
             m_adj = modeling.YSOModel()
-            m_adj.read('models/{}_m_adj.hdf5'.format(model))
+            m_adj.read(param_path + '/models/{}_m_adj.hdf5'.format(model))
         else:
             print("generating adjusted model")
             m_adj = modeling.run_flared_model(visibilities=config.visibilities, params=params_adj, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False)
-            m_adj.write('models/{}_m_adj.hdf5'.format(model))
+            m_adj.write(param_path + '/models/{}_m_adj.hdf5'.format(model))
 
-        if os.path.exists("res_imgs/{}_res_img.hdf5".format(model)):
+        if os.path.exists(param_path + "/res_imgs/{}_res_img.hdf5".format(model)):
             print("reading residual image")
             residual = imaging.Image()
-            residual.read("res_imgs/{}_res_img.hdf5".format(model))
+            residual.read(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
         else:
             print("generating residual image")
-            os.makedirs('res_imgs/', exist_ok=True)
+            os.makedirs(param_path + '/res_imgs/', exist_ok=True)
             residual = create_residual_image(visibilities, m)
-            residual.write("res_imgs/{}_res_img.hdf5".format(model))
+            residual.write(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
         
         if plot_params.plot_type == 'seperate':
             print('making blue plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_b, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'blue', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels)
+                      v_width, 'blue', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      outdir=param_path)
             print('making red plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'red', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels)
+                      v_width, 'red', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      outdir=param_path)
         if plot_params.plot_type == 'full':
             print('making full plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'full', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels)
+                      v_width, 'full', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      outdir=param_path)
 
 if __name__ == '__main__':
     main()

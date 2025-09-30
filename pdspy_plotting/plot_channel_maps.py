@@ -105,16 +105,10 @@ def plot_channel_maps_bd(visibilities, model_adj, params, params_adj, residuals,
                     ticks[-1]/visibilities["image_pixelsize"][index]))
             
         # loop through channels and plot
-        # starting and ending velocities
-        # v_start = params['v_sys'] - v_width/2.0
-        # v_end = params['v_sys'] + v_width/2.0
         # starting and ending indicies
         start = (np.abs(v/1e5 - v_start)).argmin()
         end = (np.abs(v/1e5 - v_end)).argmin()
-        nchan = (end - start)
-        # clip edges
-        # start -= 3
-        # end -= 3
+   
         plot_chans = np.linspace(start, end, ncols)
 
         for k in range(nrows):

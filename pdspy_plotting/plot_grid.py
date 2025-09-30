@@ -5,7 +5,7 @@ from .plot_channel_maps import plot_channel_maps_bd
 
 def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start, v_end,
               index, image_cmap, contours_colors, fontsize,
-              skip, v_width, plot_name, nrows, ncols, levels, negative_levels):
+              skip, v_width, plot_name, nrows, ncols, levels, negative_levels, outdir):
     plt.close()
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, sharey=True, dpi=300)
     for n in range(3):
@@ -57,7 +57,7 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             vmax = np.nanmax(visibilities['image'][0].image) # max of image
 
             # define contour levels
-            sigma = np.nanstd(visibilities['image'][0].image)
+            sigma = np.nanstd(m_adj.images[visibilities["lam"][0]].image)
             # levels = np.linspace(4.0, 31.0, 10) * sigma
             # negative_levels = np.linspace(-31.0, -4.0, 10) * sigma
             levels *= sigma
@@ -82,7 +82,7 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             ax[n, 0].text(0.5, 0.2, 'Residuals')
 
             # define contour levels
-            sigma = np.nanstd(visibilities['image'][0].image)
+            sigma = np.nanstd(residual.image)
             levels *= sigma
             negative_levels *= sigma
             # levels = np.linspace(7.0, 31.0, 10) * sigma
@@ -105,4 +105,5 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
                         wspace=0., hspace=0.0)
     fig.tight_layout()
 
-    plt.savefig("plots/{0}_{1}.png".format(model, plot_name))
+    plt.savef
+    plt.savefig(outdir + "/{0}_{1}.png".format(model, plot_name))
