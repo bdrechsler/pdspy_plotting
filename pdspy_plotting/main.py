@@ -148,18 +148,18 @@ def main():
             print('making blue plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_b, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'blue', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      v_width, 'blue', 3, plot_params.ncol, plot_params.contour_levels,
                       outdir=param_path)
             print('making red plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_r, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'red', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      v_width, 'red', 3, plot_params.ncol, plot_params.contour_levels,
                       outdir=param_path)
         if plot_params.plot_type == 'full':
             print('making full plot')
             plot_grid(model, visibilities, m_adj, params, params_adj, residual,
                       v_start_b, v_end_r, 0, 'BlueToRed', 'k', 7, 1,
-                      v_width, 'full', 3, plot_params.ncol, plot_params.levels, plot_params.negative_levels,
+                      v_width, 'full', 3, plot_params.ncol, plot_params.contour_levels,
                       outdir=param_path + "/plots/")
 
 if __name__ == '__main__':

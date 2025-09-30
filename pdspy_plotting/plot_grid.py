@@ -5,7 +5,7 @@ from .plot_channel_maps import plot_channel_maps_bd
 
 def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start, v_end,
               index, image_cmap, contours_colors, fontsize,
-              skip, v_width, plot_name, nrows, ncols, levels, negative_levels, outdir):
+              skip, v_width, plot_name, nrows, ncols, contour_levels, outdir):
     plt.close()
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, sharey=True, dpi=300)
     for n in range(3):
@@ -25,8 +25,10 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             sigma = np.nanstd(visibilities['image'][0].image)
             # levels = np.linspace(6.0, 31.0, 10) * sigma
             # negative_levels = np.linspace(-31.0, -6.0, 10) * sigma
-            levels *= sigma
-            negative_levels *= sigma
+
+            level_min, level_max = contour_levels["data"]
+            levels = np.linspace(level_min, level_max, contour_levels["nlevels"]) * sigma
+            negative_levels = np.linspace(-level_max, -level_min, contour_levels["nlevels"]) * sigma
 
             # determine how much to clean
             maxiter = 600
@@ -60,9 +62,9 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             sigma = np.nanstd(visibilities['image'][0].image)
             # levels = np.linspace(4.0, 31.0, 10) * sigma
             # negative_levels = np.linspace(-31.0, -4.0, 10) * sigma
-            levels *= sigma
-            negative_levels *= sigma
-
+            level_min, level_max = contour_levels["model"]
+            levels = np.linspace(level_min, level_max, contour_levels["nlevels"]) * sigma
+            negative_levels = np.linspace(-level_max, -level_min, contour_levels["nlevels"]) * sigma
             # determine how much to clean
             maxiter = 1000
             threshold = 0.
@@ -83,8 +85,10 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
 
             # define contour levels
             sigma = np.nanstd(visibilities['image'][0].image)
-            levels *= sigma
-            negative_levels *= sigma
+            level_min, level_max = contour_levels["residuals"]
+            levels = np.linspace(level_min, level_max, contour_levels["nlevels"]) * sigma
+            negative_levels = np.linspace(-level_max, -level_min, contour_levels["nlevels"]) * sigma
+            
             # levels = np.linspace(7.0, 31.0, 10) * sigma
             # negative_levels = np.linspace(-31.0, -7.0, 10) * sigma
 
