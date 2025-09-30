@@ -57,7 +57,7 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             vmax = np.nanmax(visibilities['image'][0].image) # max of image
 
             # define contour levels
-            sigma = np.nanstd(m_adj.images[visibilities["lam"][0]].image)
+            sigma = np.nanstd(visibilities['image'][0].image)
             # levels = np.linspace(4.0, 31.0, 10) * sigma
             # negative_levels = np.linspace(-31.0, -4.0, 10) * sigma
             levels *= sigma
@@ -82,7 +82,7 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
             ax[n, 0].text(0.5, 0.2, 'Residuals')
 
             # define contour levels
-            sigma = np.nanstd(residual.image)
+            sigma = np.nanstd(visibilities['image'][0].image)
             levels *= sigma
             negative_levels *= sigma
             # levels = np.linspace(7.0, 31.0, 10) * sigma
