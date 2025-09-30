@@ -106,4 +106,4 @@ def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start,
     fig.tight_layout()
 
     plt.savef
-    plt.savefig(outdir + "/{0}_{1}.png".format(model, plot_name))
+    plt.savefig(outdir + "{0}_{1}.png".format(model, plot_name))
