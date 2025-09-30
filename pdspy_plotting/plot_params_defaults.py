@@ -12,4 +12,5 @@ contour_levels = {"data": (6.0, 31.0),
                   "model": (4.0, 31.0),
                   "residuals": (7.0, 31.0),
                   "nlevels": 10}
+plot_size = (12, 3)
 ncpu=8 # number of cpus

@@ -5,10 +5,10 @@ from .plot_channel_maps import plot_channel_maps_bd
 
 def plot_grid(model, visibilities, m_adj, params, params_adj, residual, v_start, v_end,
               index, image_cmap, contours_colors, fontsize,
-              skip, v_width, plot_name, nrows, ncols, contour_levels, outdir):
+              skip, v_width, plot_name, nrows, ncols, contour_levels, plot_size, outdir):
     plt.close()
     fig, ax = plt.subplots(nrows=nrows, ncols=ncols, sharex=True, sharey=True, dpi=300)
-    fig.set_size_inches(12, 4)
+    fig.set_size_inches(plot_size[0], plot_size[1])
     for n in range(3):
         # first, plot the data
         if n == 0:
