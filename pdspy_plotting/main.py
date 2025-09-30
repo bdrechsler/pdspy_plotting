@@ -91,6 +91,9 @@ def main():
 
         ## read in mm visibilites
         # visibilities, images, spectra = utils.load_data(config, model="flared")
+        ## read in the image
+        config.visibilities['image'] = []
+        config.visibilities["image"].append(imaging.readimfits(config.visibilities["image_file"][0]))
 
         # load in dynesty resulsts
         keys, params, sigma, samples = utils.load_results(config, model_path=model_path, code='dynesty',
