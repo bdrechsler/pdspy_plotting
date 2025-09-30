@@ -8,7 +8,6 @@ plot_type = 'full' # determine to make one plot (full) or split into seperate bl
 fontsize = 7
 ncol = 7
 levels = np.linspace(6.0, 31.0, 10)
-negative_levels = np.linspace(-31.0, -6.0, -10)
 contour_levels = {"data": (6.0, 31.0),
                   "model": (4.0, 31.0),
                   "residuals": (7.0, 31.0),
