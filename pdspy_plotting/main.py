@@ -38,7 +38,7 @@ def main():
     # import plot parameters
     if os.path.exists(args.path):
         sys.path.append(param_path)
-        from param_path import plot_params
+        import plot_params
     else:
         print("Parameter file not found")
     
