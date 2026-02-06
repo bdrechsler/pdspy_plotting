@@ -165,7 +165,7 @@ def main():
         if os.path.exists(param_path + '{}_m_adj.hdf5'.format(model)):
             print("reading adjusted model")
             m_adj = modeling.YSOModel()
-            m_adj.read(param_path + '{}_m_adj.hdf5'.format(model))
+            m_adj.read(param_path + '/{}_m_adj.hdf5'.format(model))
         else:
             print("generating adjusted model")
             m_adj = modeling.run_flared_model(visibilities=config.visibilities, params=params_adj, parameters=config.parameters, 
@@ -180,7 +180,7 @@ def main():
             print("generating residual image")
             visibilities, images, spectra = utils.load_data(config, model="flared")
             residual = create_residual_image(visibilities, m)
-            residual.write(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
+            residual.write(param_path + "/{}_res_img.hdf5".format(model))
         
         if plot_params.plot_type == 'seperate':
             print('making blue plot')
