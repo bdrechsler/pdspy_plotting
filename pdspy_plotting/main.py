@@ -25,7 +25,7 @@ def main():
 
     args = parser.parse_args()
 
-    param_path = os.path.dirname(args.config)
+    param_path = os.path.dirname(args.path)
     # import plot parameters
     if os.path.exists(args.config):
         spec = importlib.util.spec_from_file_location("parameters", args.config)
