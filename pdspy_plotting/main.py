@@ -20,7 +20,7 @@ def main():
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-c', '--config', default=None, help='path to plot_params.py')
+    parser.add_argument('-p', '--path', default="./", help='path to plot_params.py')
 
 
     args = parser.parse_args()
