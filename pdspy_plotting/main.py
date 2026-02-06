@@ -98,7 +98,7 @@ def main():
         config.visibilities['fmt'] = ['5.1f', '5.1f', '5.1f']
 
         ## read in mm visibilites
-        # visibilities, images, spectra = utils.load_data(config, model="flared")
+        visibilities, images, spectra = utils.load_data(config, model="flared")
         ## read in the image
         config.visibilities['image'] = []
         config.visibilities["image"].append(imaging.readimfits(config.visibilities["image_file"][0]))
