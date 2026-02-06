@@ -161,7 +161,8 @@ def main():
             m.write(param_path + '/{}_m.hdf5'.format(model))
 
         # make plots directory if it doesn't exist
-        os.makedirs(param_path + "plots/", exist_ok=True)
+        os.makedirs(param_path + "/plots/", exist_ok=True)
+        
         if os.path.exists(param_path + '{}_m_adj.hdf5'.format(model)):
             print("reading adjusted model")
             m_adj = modeling.YSOModel()
