@@ -25,15 +25,23 @@ def main():
 
     args = parser.parse_args()
 
-    param_path = os.path.dirname(args.path) + "plot_params.py"
+    param_path = os.path.dirname(args.path)
+    # import plot parameters
+    # if os.path.exists(args.path):
+    #     spec = importlib.util.spec_from_file_location("parameters", args.path)
+    #     plot_params = importlib.util.module_from_spec(spec)
+    #     sys.modules["parameters"] = plot_params
+    #     spec.loader.exec_module(plot_params)
+    # else:
+    #     print("Parameter file not found")
+
     # import plot parameters
     if os.path.exists(args.path):
-        spec = importlib.util.spec_from_file_location("parameters", args.path)
-        plot_params = importlib.util.module_from_spec(spec)
-        sys.modules["parameters"] = plot_params
-        spec.loader.exec_module(plot_params)
+        sys.path.append(param_path)
+        from param_path import plot_params
     else:
         print("Parameter file not found")
+    
 
     comm = MPI.COMM_WORLD
 
