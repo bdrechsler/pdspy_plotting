@@ -26,6 +26,7 @@ def main():
     args = parser.parse_args()
 
     param_path = os.path.dirname(args.path)
+    abs_param_path = os.path.abspath(param_path)
     # import plot parameters
     # if os.path.exists(args.path):
     #     spec = importlib.util.spec_from_file_location("parameters", args.path)
@@ -37,7 +38,7 @@ def main():
 
     # import plot parameters
     if os.path.exists(args.path):
-        sys.path.append(param_path)
+        sys.path.append(abs_param_path)
         import plot_params
     else:
         print("Parameter file not found")
