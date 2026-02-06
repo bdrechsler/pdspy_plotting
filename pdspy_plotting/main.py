@@ -113,38 +113,36 @@ def main():
 
         # load in models and residuals if they exists
         # if not, generate them
-        if os.path.exists(param_path + '/models/{}_m.hdf5'.format(model)):
+        if os.path.exists(param_path + '/{}_m.hdf5'.format(model)):
             print("reading model")
             m = modeling.YSOModel()
-            m.read(param_path + '/models/{}_m.hdf5'.format(model))
+            m.read(param_path + '/{}_m.hdf5'.format(model))
         else:
             print("generating model")
-            os.makedirs(param_path + '/models/', exist_ok=True)
             m = modeling.run_flared_model(visibilities=config.visibilities, params=params, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False, 
                                         ftcode='galario-unstructured')
-            m.write(param_path + '/models/{}_m.hdf5'.format(model))
+            m.write(param_path + '/{}_m.hdf5'.format(model))
 
         # make plots directory if it doesn't exist
         os.makedirs(param_path + "plots/", exist_ok=True)
-        if os.path.exists(param_path + '/models/{}_m_adj.hdf5'.format(model)):
+        if os.path.exists(param_path + '{}_m_adj.hdf5'.format(model)):
             print("reading adjusted model")
             m_adj = modeling.YSOModel()
-            m_adj.read(param_path + '/models/{}_m_adj.hdf5'.format(model))
+            m_adj.read(param_path + '{}_m_adj.hdf5'.format(model))
         else:
             print("generating adjusted model")
             m_adj = modeling.run_flared_model(visibilities=config.visibilities, params=params_adj, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False)
-            m_adj.write(param_path + '/models/{}_m_adj.hdf5'.format(model))
+            m_adj.write('/{}_m_adj.hdf5'.format(model))
 
-        if os.path.exists(param_path + "/res_imgs/{}_res_img.hdf5".format(model)):
+        if os.path.exists(param_path + "/{}_res_img.hdf5".format(model)):
             print("reading residual image")
             residual = imaging.Image()
-            residual.read(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
+            residual.read(param_path + "/{}_res_img.hdf5".format(model))
         else:
             print("generating residual image")
             visibilities, images, spectra = utils.load_data(config, model="flared")
-            os.makedirs(param_path + '/res_imgs/', exist_ok=True)
             residual = create_residual_image(visibilities, m)
             residual.write(param_path + "/res_imgs/{}_res_img.hdf5".format(model))
         
