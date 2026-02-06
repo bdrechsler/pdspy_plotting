@@ -170,7 +170,7 @@ def main():
             print("generating adjusted model")
             m_adj = modeling.run_flared_model(visibilities=config.visibilities, params=params_adj, parameters=config.parameters, 
                                         plot=True, ncpus=ncpus, source=source, plot_vis=False)
-            m_adj.write('/{}_m_adj.hdf5'.format(model))
+            m_adj.write(param_path +'/{}_m_adj.hdf5'.format(model))
 
         if os.path.exists(param_path + "/{}_res_img.hdf5".format(model)):
             print("reading residual image")
