@@ -107,17 +107,45 @@ def main():
         keys, params, sigma, samples = utils.load_results(config, model_path=model_path, code='dynesty',
                                                     best='peak', unc='std', percentile=68.)
 
-        # adjust the parameters
+
+        # get parameters needed for plotting
+        model_plotting_params = ['x0', 'y0', 'pa', 'v_sys']
+        model_param_values = []
         params_adj = params.copy()
-        params_adj['x0'] *= -1.0
-        params_adj['y0'] *= -1.0
-        params_adj['pa'] *= -1.0
+
+        for p in model_plotting_params:
+            if p in params:
+                if p != 'vsys':
+                    model_param_values.append(params_adj[p])
+                else:
+                    model_param_values.append(params[p])
+            else:
+                model_param_values.append(config.parameters[p]['value'])
+        
+        x0, y0, pa, v_sys = model_param_values
+
+        params_adj['x0'] = -x0
+        params_adj['y0'] = -y0
+        params_adj['pa'] = -pa
+
+        # adjust the parameters
+        # params_adj = params.copy()
+        # if 'x0' in params_adj:
+        #     params_adj['x0'] *= -1.0
+        # params_adj['y0'] *= -1.0
+        # params_adj['pa'] *= -1.0
+      
 
         # define start and end velocities for the red and blue figures
-        v_start_b = params["v_sys"] - (v_width / 2.0)
-        v_end_b = params["v_sys"]
-        v_start_r = params["v_sys"]
-        v_end_r = params["v_sys"] + (v_width / 2.0)
+        # v_start_b = params["v_sys"] - (v_width / 2.0)
+        # v_end_b = params["v_sys"]
+        # v_start_r = params["v_sys"]
+        # v_end_r = params["v_sys"] + (v_width / 2.0)
+
+        v_start_b = v_sys - (v_width / 2.0)
+        v_end_b = v_sys
+        v_start_r = v_sys
+        v_end_r = v_sys + (v_width / 2.0)
 
         # load in models and residuals if they exists
         # if not, generate them
